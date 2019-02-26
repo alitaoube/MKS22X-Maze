@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Maze{
 	public static void main(String[] args){
-		read(args[0]);	
+		readArr(args[0]);	
 	}
 
   public static void read(String filename){
@@ -21,4 +21,20 @@ public class Maze{
 		System.out.println("Gotta catch 'em all");
 	}
 	}
+
+	public static void readArr(String filename){
+	try{
+		File text = new File(filename);	
+
+		Scanner inf = new Scanner(text);
+
+		while (inf.hasNextLine()){
+			System.out.println(inf.nextLine());
+		}
+	}
+	catch(FileNotFoundException e){
+		System.out.println("Gotta catch 'em all");
+	}
+	}
+
 }
