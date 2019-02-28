@@ -2,6 +2,17 @@
 import java.util.*; // Scanner
 import java.io.*; // File, FileNotFoundException
 public class Maze{
+	public static void main(String[] args) {
+		try{
+			// System.out.print("Here");
+			Maze mazes = new Maze("data3.dat");
+
+			System.out.print(mazes.toString());
+		}
+		catch(FileNotFoundException e){
+			System.out.print("that doesn't exist in this world");
+		}
+	}
 
     private char[][]maze;
     private boolean animate;//false by default
@@ -33,30 +44,36 @@ public class Maze{
 					int x = 0;
 					int y = 0;
 					while (inf.hasNextLine()) {
-						x++;
 						y = inf.nextLine().length();
+						x++;
+
 					}
 					maze = new char[x][y];
 
+					inf = new Scanner(text);
 					int z = 0;
 					while (inf.hasNextLine()){
 						String line = inf.nextLine();
 						for (int i = 0; i < line.length(); i++){
 							maze[z][i] = line.charAt(i);
 						}
+						z++;
 					}
 				}
 				catch(FileNotFoundException e){
+					e.printStackTrace();
 					System.out.println("Gotta catch 'em all");
 				}
     }
 
 		public String toString(){
 			String output = "";
-			for (int x = 0; x < maze.length; x++){
-				for (int y = 0; y < maze[x].length; y++) {
-					output += maze[x][y];
+
+			for (char[] x: maze){
+				for (char y: x){
+					output += y;
 				}
+				output += "\n";
 			}
 			return output;
 		}
