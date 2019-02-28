@@ -3,37 +3,6 @@ import java.util.*; // Scanner
 import java.io.*; // File, FileNotFoundException
 public class Maze{
 
-	public static void read(String filename){
-	try{
-		File text = new File(filename);
-
-		Scanner inf = new Scanner(text);
-
-		while (inf.hasNext()){
-			System.out.println(inf.next());
-		}
-	}
-	catch(FileNotFoundException e){
-		System.out.println("Gotta catch 'em all");
-	}
-	}
-
-	public static void readArr(String filename){
-	try{
-		File text = new File(filename);
-
-		Scanner inf = new Scanner(text);
-
-		while (inf.hasNextLine()){
-			System.out.println(inf.nextLine());
-		}
-	}
-	catch(FileNotFoundException e){
-		System.out.println("Gotta catch 'em all");
-	}
-	}
-
-
     private char[][]maze;
     private boolean animate;//false by default
 
@@ -64,12 +33,16 @@ public class Maze{
 					int x = 0;
 					int y = 0;
 					while (inf.hasNextLine()) {
+						x++;
+						y = inf.nextLine().length();
+					}
+					maze = new char[x][y];
 
-						for (int i = 0; i < inf.nextLine().length; i++){
-							x++;
-						}
-						for (int k: inf.next()){
-							y++;
+					int z = 0;
+					while (inf.hasNextLine()){
+						String line = inf.nextLine();
+						for (int i = 0; i < line.length(); i++){
+							maze[z][i] = line.charAt(i);
 						}
 					}
 				}
