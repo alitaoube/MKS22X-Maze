@@ -150,8 +150,9 @@ public class Maze{
 
 				All visited spots that are part of the solution are changed to '@'
 		*/
-		private int solve(int row, int col){ //you can add more parameters since this is private
+		private int solve(int row, int col, int numAt){ //you can add more parameters since this is private
 
+			if (maze[row][col] == '#')
 
 				//automatic animation! You are welcome.
 				if(animate){
@@ -162,9 +163,11 @@ public class Maze{
 						wait(20);
 				}
 
-				// if (maze[row][col] == 'E') return numAt;
-				//
-				// if ()
+				if (maze[row][col] == 'E') return numAt;
+
+				for (int x = 0; x < 4; x++) { // Four max moves
+
+				}
 
 				//COMPLETE SOLVE
 
