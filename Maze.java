@@ -113,52 +113,62 @@ public class Maze{
     */
     public int solve(){
 			return 0;
+			for (int x = 0; x < maze.length; x++){
+				for (int y = 0; y < maze[x].length; y++){
+					if (maze[x][y] == 'S'){
+						maze[x][y] = '@';
+						return solve(x, y, 1);
+					}
+				}
+			}
+			}
 
-            //find the location of the S.
+    //find the location of the S.
 
 
-            //erase the S
+    //erase the S
 
 
-            //and start solving at the location of the s.
+    //and start solving at the location of the s.
 
-            //return solve(???,???);
+    //return solve(???,???);
+
+		/*
+			Recursive Solve function:
+
+			A solved maze has a path marked with '@' from S to E.
+
+			Returns the number of @ symbols from S to E when the maze is solved,
+			Returns -1 when the maze has no solution.
+
+
+			Postcondition:
+
+				The S is replaced with '@' but the 'E' is not.
+
+				All visited spots that were not part of the solution are changed to '.'
+
+				All visited spots that are part of the solution are changed to '@'
+		*/
+		private int solve(int row, int col){ //you can add more parameters since this is private
+
+
+				//automatic animation! You are welcome.
+				if(animate){
+
+						clearTerminal();
+						System.out.println(this);
+
+						wait(20);
+				}
+
+				// if (maze[row][col] == 'E') return numAt;
+				//
+				// if ()
+
+				//COMPLETE SOLVE
+
+				return -1; //so it compiles
+		}
 
     }
-
-    /*
-      Recursive Solve function:
-
-      A solved maze has a path marked with '@' from S to E.
-
-      Returns the number of @ symbols from S to E when the maze is solved,
-      Returns -1 when the maze has no solution.
-
-
-      Postcondition:
-
-        The S is replaced with '@' but the 'E' is not.
-
-        All visited spots that were not part of the solution are changed to '.'
-
-        All visited spots that are part of the solution are changed to '@'
-    */
-    private int solve(int row, int col){ //you can add more parameters since this is private
-
-
-        //automatic animation! You are welcome.
-        if(animate){
-
-            clearTerminal();
-            System.out.println(this);
-
-            wait(20);
-        }
-
-        //COMPLETE SOLVE
-
-        return -1; //so it compiles
-    }
-
-
-}
