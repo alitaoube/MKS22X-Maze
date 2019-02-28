@@ -51,6 +51,16 @@ public class Maze{
 				}
     }
 
+		public String toString(){
+			String output = "";
+			for (int x = 0; x < maze.length; x++){
+				for (int y = 0; y < maze[x].length; y++) {
+					output += maze[x][y];
+				}
+			}
+			return output;
+		}
+
 
     private void wait(int millis){
          try {
