@@ -112,7 +112,6 @@ public class Maze{
 
     */
     public int solve(){
-			return 0;
 			for (int x = 0; x < maze.length; x++){
 				for (int y = 0; y < maze[x].length; y++){
 					if (maze[x][y] == 'S'){
@@ -121,6 +120,7 @@ public class Maze{
 					}
 				}
 			}
+			return 0;
 			}
 
     //find the location of the S.
@@ -151,6 +151,12 @@ public class Maze{
 				All visited spots that are part of the solution are changed to '@'
 		*/
 		private int solve(int row, int col, int numAt){ //you can add more parameters since this is private
+			//
+			// if (maze[x][y] != '#' && maze[x][y] != 'E'){
+			// 	maze[x][y] == '@';
+			// 	return solve(x, y, 1);
+			//
+			// }
 
 			if (maze[row][col] == '#')
 
