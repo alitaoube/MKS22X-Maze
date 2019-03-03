@@ -176,13 +176,17 @@ public class Maze{
 					int r = row + moves[x][0];
 					int c = col + moves[x][1];
 
-
-
+					if (isValid(r, c)){
+						if (maze[r][c] != '@' && maze[r][c] != '#' && maze[r][c] != '.'){
+							solve(r, c, numAt+1);
+						}
+					}
 				}
+				if (numAt == 1) maze[row][col] = '.';
 
 				//COMPLETE SOLVE
 
-				return -1; //so it compiles
+				return numAt; //so it compiles
 		}
 
     }
