@@ -157,9 +157,7 @@ public class Maze{
 
 
 		private int solve(int row, int col, int numAt){
-
-			if (maze[row][col] == '#')
-
+			int start = numAt;
 				//automatic animation! You are welcome.
 				if(animate){
 
@@ -182,11 +180,10 @@ public class Maze{
 						}
 					}
 				}
-				if (numAt == 1) maze[row][col] = '.';
+				if (numAt == start) maze[row][col] = '.'; // If the number hasn't changed, it means
+																									// this position is a dead end
 
-				//COMPLETE SOLVE
-
-				return numAt; //so it compiles
+				return numAt;
 		}
 
     }
