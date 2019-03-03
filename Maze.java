@@ -150,6 +150,12 @@ public class Maze{
 
 				All visited spots that are part of the solution are changed to '@'
 		*/
+
+		private boolean isValid(int row, int col){ // Checks that all params are met
+			return (row >= 0 && col >= 0 && row < maze.length && col < maze[row].length);
+		}
+
+
 		private int solve(int row, int col, int numAt){
 
 			if (maze[row][col] == '#')
@@ -165,7 +171,14 @@ public class Maze{
 
 				if (maze[row][col] == 'E') return numAt;
 
-				for (int x = 0; x )
+				maze[row][col] = '@';
+				for (int x = 0; x < moves.length; x++){
+					int r = row + moves[x][0];
+					int c = col + moves[x][1];
+
+
+
+				}
 
 				//COMPLETE SOLVE
 
