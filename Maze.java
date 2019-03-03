@@ -16,6 +16,7 @@ public class Maze{
 
     private char[][]maze;
     private boolean animate;//false by default
+		private int[][] moves = {{1,0}, {0, 1}, {-1, 0}, {0, -1}};
 
     /*Constructor loads a maze text file, and sets animate to false by default.
 
@@ -115,7 +116,6 @@ public class Maze{
 			for (int x = 0; x < maze.length; x++){
 				for (int y = 0; y < maze[x].length; y++){
 					if (maze[x][y] == 'S'){
-						maze[x][y] = '@';
 						return solve(x, y, 1);
 					}
 				}
@@ -150,13 +150,7 @@ public class Maze{
 
 				All visited spots that are part of the solution are changed to '@'
 		*/
-		private int solve(int row, int col, int numAt){ //you can add more parameters since this is private
-			//
-			// if (maze[x][y] != '#' && maze[x][y] != 'E'){
-			// 	maze[x][y] == '@';
-			// 	return solve(x, y, 1);
-			//
-			// }
+		private int solve(int row, int col, int numAt){
 
 			if (maze[row][col] == '#')
 
@@ -171,9 +165,7 @@ public class Maze{
 
 				if (maze[row][col] == 'E') return numAt;
 
-				for (int x = 0; x < 4; x++) { // Four max moves
-
-				}
+				for (int x = 0; x )
 
 				//COMPLETE SOLVE
 
