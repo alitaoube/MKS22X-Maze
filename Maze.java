@@ -16,7 +16,7 @@ public class Maze{
     private char[][]maze;
     private boolean animate;//false by default
 		private int[][] moves = {{1,0}, {0, 1}, {-1, 0}, {0, -1}};
-		private int track = 0;
+		private int changes = -1;
 
     /*Constructor loads a maze text file, and sets animate to false by default.
 
@@ -117,7 +117,7 @@ public class Maze{
 			for (int x = 0; x < maze.length; x++){
 				for (int y = 0; y < maze[x].length; y++){
 					if (maze[x][y] == 'S'){
-						return solve(x, y, 1, 0);
+						return solve(x, y, 1);
 					}
 				}
 			}
@@ -157,7 +157,7 @@ public class Maze{
 		}
 
 
-		private int solve(int row, int col, int total, int changes){
+		private int solve(int row, int col, int total){
 			//automatic animation! You are welcome.
 			if(animate){
 
@@ -167,25 +167,28 @@ public class Maze{
 					wait(20);
 			}
 
+			// System.out.println(maze[row][col] == 'E');
+
 			if (maze[row][col] == 'E') {
-				changes = 1;
-				return total;
+				changes = total;
 			}
 
-			maze[row][col] = '@';
-			for (int x = 0; x < moves.length; x++){
-				int r = row + moves[x][0];
-				int c = col + moves[x][1];
+			else{
+				maze[row][col] = '@';
 
-				if (isValid(r, c)){
-					if (maze[r][c] != '@' && maze[r][c] != '#' && maze[r][c] != '.' && changes == 0){
-						solve(r, c, total+1, changes);
+				for (int x = 0; x < moves.length; x++){
+					int r = row + moves[x][0];
+					int c = col + moves[x][1];
+
+					if (isValid(r, c)){
+						if (maze[r][c] != '@' && maze[r][c] != '#' && maze[r][c] != '.' && changes == -1){
+							solve(r, c, total+1);
+						}
 					}
 				}
+				if (changes == -1) maze[row][col] = '.';
 			}
-			maze[row][col] = '.';
-
-			return total;
+			return changes;
 		}
 
   }
