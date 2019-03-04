@@ -121,7 +121,7 @@ public class Maze{
 					}
 				}
 			}
-			return 0;
+			return -1;
 			}
 
     //find the location of the S.
@@ -167,7 +167,10 @@ public class Maze{
 					wait(20);
 			}
 
-			if (maze[row][col] == 'E') return total;
+			if (maze[row][col] == 'E') {
+				changes = 1;
+				return total;
+			}
 
 			maze[row][col] = '@';
 			for (int x = 0; x < moves.length; x++){
@@ -176,11 +179,12 @@ public class Maze{
 
 				if (isValid(r, c)){
 					if (maze[r][c] != '@' && maze[r][c] != '#' && maze[r][c] != '.' && changes == 0){
-						solve(r, c, total+1, 0);
+						solve(r, c, total+1, changes);
 					}
 				}
-				if (changes == 0) maze[row][col] = '.';
 			}
+			maze[row][col] = '.';
+
 			return total;
 		}
 
