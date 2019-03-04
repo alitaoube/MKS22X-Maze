@@ -5,6 +5,7 @@ public class Maze{
 	public static void main(String[] args) {
 		try{
 			Maze maze = new Maze("Maze1.txt");
+			maze.setAnimate(true);
 			System.out.print(maze.solve());
 		}
 		catch(FileNotFoundException e){
@@ -15,6 +16,7 @@ public class Maze{
     private char[][]maze;
     private boolean animate;//false by default
 		private int[][] moves = {{1,0}, {0, 1}, {-1, 0}, {0, -1}};
+		private int track = 0;
 
     /*Constructor loads a maze text file, and sets animate to false by default.
 
@@ -37,7 +39,7 @@ public class Maze{
     public Maze(String filename) throws FileNotFoundException{
         //COMPLETE CONSTRUCTOR
 				try{
-					animate = true;
+					// animate = true;
 					File text = new File(filename);
 
 					Scanner inf = new Scanner(text);
@@ -150,39 +152,38 @@ public class Maze{
 				All visited spots that are part of the solution are changed to '@'
 		*/
 
+		private boolean solveHelp(int row, int col, int numAt){
+			track = numAt;
+
+			if (maze[row][col] == 'E') return true;
+
+			if (!isValid(row, col) || maze[row][col] == '#' || maze[row][col] == '#'){
+				return false;
+			}
+
+			for (int x = 0; x < moves.length; x++){
+				int r = row + moves[x][0];
+				int c = col + moves[x][1];
+
+				if (isValid(r, c) || maze[r][c] != '#' || maze[r][c] != '#'){
+					if (solveHelp(r, c, numAt+1)){
+						track = numAt;
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
 		private boolean isValid(int row, int col){ // Checks that all params are met
 			return (row >= 0 && col >= 0 && row < maze.length && col < maze[row].length);
 		}
 
 
 		private int solve(int row, int col, int numAt){
-			int start = numAt;
-				//automatic animation! You are welcome.
-				if(animate){
 
-						clearTerminal();
-						System.out.println(this);
-
-						wait(20);
-				}
-
-				if (maze[row][col] == 'E') return numAt;
-
-				maze[row][col] = '@';
-				for (int x = 0; x < moves.length; x++){
-					int r = row + moves[x][0];
-					int c = col + moves[x][1];
-
-					if (isValid(r, c)){
-						if (maze[r][c] != '@' && maze[r][c] != '#' && maze[r][c] != '.'){
-							solve(r, c, numAt+1);
-						}
-					}
-				}
-				if (numAt == start) maze[row][col] = '.'; // If the number hasn't changed, it means
-																									// this position is a dead end
-
-				return numAt;
+			solveHelp(row, col, numAt);
+			return track;
 		}
 
-    }
+  }
