@@ -4,13 +4,11 @@ import java.io.*; // File, FileNotFoundException
 public class Maze{
 	public static void main(String[] args) {
 		try{
-			// System.out.print("Here");
-			Maze mazes = new Maze("data3.dat");
-
-			System.out.print(mazes.toString());
+			Maze maze = new Maze("Maze1.txt");
+			System.out.print(maze.solve());
 		}
 		catch(FileNotFoundException e){
-			System.out.print("that doesn't exist in this world");
+			e.printStackTrace();
 		}
 	}
 
@@ -39,6 +37,7 @@ public class Maze{
     public Maze(String filename) throws FileNotFoundException{
         //COMPLETE CONSTRUCTOR
 				try{
+					animate = true;
 					File text = new File(filename);
 
 					Scanner inf = new Scanner(text);
