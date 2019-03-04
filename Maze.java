@@ -117,7 +117,7 @@ public class Maze{
 			for (int x = 0; x < maze.length; x++){
 				for (int y = 0; y < maze[x].length; y++){
 					if (maze[x][y] == 'S'){
-						return solve(x, y, 1);
+						return solve(x, y, 1, 0);
 					}
 				}
 			}
@@ -152,38 +152,36 @@ public class Maze{
 				All visited spots that are part of the solution are changed to '@'
 		*/
 
-		private boolean solveHelp(int row, int col, int numAt){
-			track = numAt;
-
-			if (maze[row][col] == 'E') return true;
-
-			if (!isValid(row, col) || maze[row][col] == '#' || maze[row][col] == '#'){
-				return false;
-			}
-
-			for (int x = 0; x < moves.length; x++){
-				int r = row + moves[x][0];
-				int c = col + moves[x][1];
-
-				if (isValid(r, c) || maze[r][c] != '#' || maze[r][c] != '#'){
-					if (solveHelp(r, c, numAt+1)){
-						track = numAt;
-						return true;
-					}
-				}
-			}
-			return false;
-		}
-
 		private boolean isValid(int row, int col){ // Checks that all params are met
 			return (row >= 0 && col >= 0 && row < maze.length && col < maze[row].length);
 		}
 
 
-		private int solve(int row, int col, int numAt){
+		private int solve(int row, int col, int total, int changes){
+			//automatic animation! You are welcome.
+			if(animate){
 
-			solveHelp(row, col, numAt);
-			return track;
+					clearTerminal();
+					System.out.println(this);
+
+					wait(20);
+			}
+
+			if (maze[row][col] == 'E') return total;
+
+			maze[row][col] = '@';
+			for (int x = 0; x < moves.length; x++){
+				int r = row + moves[x][0];
+				int c = col + moves[x][1];
+
+				if (isValid(r, c)){
+					if (maze[r][c] != '@' && maze[r][c] != '#' && maze[r][c] != '.' && changes == 0){
+						solve(r, c, total+1, 0);
+					}
+				}
+				if (changes == 0) maze[row][col] = '.';
+			}
+			return total;
 		}
 
   }
