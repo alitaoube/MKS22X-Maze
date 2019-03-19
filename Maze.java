@@ -2,17 +2,6 @@
 import java.util.*; // Scanner
 import java.io.*; // File, FileNotFoundException
 public class Maze{
-	public static void main(String[] args) {
-		try{
-			Maze maze = new Maze("Maze1.txt");
-			maze.setAnimate(true);
-			System.out.print(maze.solve());
-		}
-		catch(FileNotFoundException e){
-			e.printStackTrace();
-		}
-	}
-
     private char[][]maze;
     private boolean animate;//false by default
 		private int[][] moves = {{1,0}, {0, 1}, {-1, 0}, {0, -1}};
@@ -188,7 +177,7 @@ public class Maze{
 				}
 				if (changes == -1) maze[row][col] = '.';
 			}
-			return changes;
+			return changes - 1; // to remove counting the E
 		}
 
   }
